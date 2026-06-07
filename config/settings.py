@@ -4,8 +4,8 @@ import streamlit as st
 
 def get_database_url():
     """
-    Get DATABASE_URL from Streamlit secrets or environment variable.
-    Return None if it is missing or empty.
+    從 Streamlit Secrets 或環境變數讀取 DATABASE_URL。
+    如果沒有設定或是空字串，就回傳 None。
     """
 
     try:
