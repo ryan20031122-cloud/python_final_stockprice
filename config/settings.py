@@ -1,11 +1,18 @@
 import os
-from dotenv import load_dotenv
+import streamlit as st
 
-load_dotenv()
 
-DATABASE_URL = os.getenv("DATABASE_URL", "")
-NEWS_API_KEY = os.getenv("NEWS_API_KEY", "")
+def get_database_url():
+    try:
+        if "DATABASE_URL" in st.secrets:
+            url = st.secrets["DATABASE_URL"]
+            if url:
+                return str(url).strip()
+    except Exception:
+        pass
 
-TICKERS = ["AAPL", "MSFT", "NVDA", "GOOGL", "TSLA"]
-DEFAULT_PERIOD = "1y"
-NEWS_QUERY = "technology stocks OR artificial intelligence OR semiconductor OR cloud computing"
+    url = os.getenv("DATABASE_URL")
+    if url:
+        return url.strip()
+
+    return None
