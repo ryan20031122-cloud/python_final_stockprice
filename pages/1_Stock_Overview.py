@@ -3,10 +3,7 @@ import pandas as pd
 import plotly.express as px
 from sqlalchemy import create_engine
 
-try:
-    from config.settings import get_database_url
-except Exception:
-    get_database_url = lambda: None
+from config.settings import get_database_url
 
 
 st.set_page_config(page_title="Stock Overview", layout="wide")
@@ -50,8 +47,7 @@ def load_data():
 
         return df, "database"
 
-    except Exception as e:
-        st.warning("資料庫目前無法連線，已切換為 Demo 資料。")
+    except Exception:
         return sample_data(), "demo"
 
 
